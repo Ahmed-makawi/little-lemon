@@ -3,24 +3,24 @@ package com.ahmed3.littlelemonCapstone
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,11 +36,51 @@ import kotlinx.coroutines.withContext
 fun profileScreen(navController: NavController) {
 
     Column() {
-        logoImage()
+        header(navController)
         bodyOfTheProfile(navController)
     }
 }
 
+
+@Composable
+fun header(navController: NavController) {
+
+    Row(
+        //  horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(65.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Spacer(modifier = Modifier.width(8.dp))
+        IconButton(onClick = {
+            navController.popBackStack()
+        }) {
+            Image(
+                painter = rememberVectorPainter(Icons.Default.ArrowBack),
+                contentDescription = "profile Icon",
+                modifier = Modifier
+                    .size(30.dp)
+                    .clip(shape = RoundedCornerShape(19.dp)),
+            )
+        }
+
+        Spacer(modifier = Modifier.width(65.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = "header logo",
+            modifier = Modifier
+                //.fillMaxWidth(0.5F)
+                .size(150.dp)
+                .padding(horizontal = 20.dp)
+            //.fillMaxWidth()
+        )
+
+        //Spacer(modifier = Modifier.width(65.dp))
+
+    }
+}
 
 
 
@@ -67,7 +107,21 @@ fun bodyOfTheProfile(navController: NavController) {
 
 
 
-    Column(Modifier.background(MaterialTheme.colors.background)) {
+    Column(
+        Modifier.background(MaterialTheme.colors.background),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Spacer(modifier = Modifier.height(50.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.profile),
+            contentDescription = "profile Icon",
+            modifier = Modifier
+                .size(150.dp)
+                .clip(CircleShape),
+        )
 
         Text(
             text = "Personal Information",
@@ -75,17 +129,17 @@ fun bodyOfTheProfile(navController: NavController) {
             color = MaterialTheme.colors.secondary,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(20.dp, 40.dp, 0.dp, 40.dp)
+                .padding(20.dp, 40.dp, 0.dp, 20.dp)
         )
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Box(
+       /* Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .background(MaterialTheme.colors.background)
-        ) {
+        ) {*/
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -205,6 +259,6 @@ fun bodyOfTheProfile(navController: NavController) {
                 }
 
             }
-        }
+        //}
     }
 }

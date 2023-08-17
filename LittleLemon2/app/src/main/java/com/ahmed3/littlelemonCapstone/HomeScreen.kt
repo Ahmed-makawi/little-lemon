@@ -29,9 +29,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.alpha
 import androidx.navigation.NavController
 import androidx.room.Room
 import coil.annotation.ExperimentalCoilApi
@@ -308,11 +310,15 @@ fun MenuItems(menuItem: MenuItemRoom) {
             val painter = rememberImagePainter(
                 menuItem.image,
                 builder = {
+                    //placeholder(R.drawable.image_place_holder)
                     transformations(
-                        RoundedCornersTransformation(10f)
+                        RoundedCornersTransformation(10f),
                     )
                 }
             )
+            if (painter.state is ImagePainter.State.Loading) {
+                CircularProgressIndicator()
+            }
             Image(
                 painter = painter,
                 contentDescription = "",
@@ -321,10 +327,6 @@ fun MenuItems(menuItem: MenuItemRoom) {
                     .height(110.dp)
                     .width(140.dp)
             )
-            if (painter.state is ImagePainter.State.Loading) {
-                CircularProgressIndicator()
-            }
-
         }
     }
     Spacer(modifier = Modifier.height(3.dp))
@@ -414,59 +416,9 @@ fun searchNotFoundIcon() {
             .background(MaterialTheme.colors.background)
             .padding(100.dp)
     ) {
-        Icon(
-            imageVector = Icons.Default.Clear,
-            contentDescription = null,
-            Modifier
-                .size(150.dp)
-                .alpha(0.1f)
-                .background(Color.LightGray, shape = CircleShape)
-        )
+        CircularProgressIndicator()
     }
 }
-
-@Composable
-fun button(searchPhrase: String) {
-
-    val context: Context = LocalContext.current
-    val sharedPreferences: SharedPreferences =
-        context.getSharedPreferences("LittleLemon", Context.MODE_PRIVATE)
-
-
-    Button(
-        onClick = {
-            /*GlobalScope.launch {
-                withContext(Dispatchers.IO) {
-                    sharedPreferences.edit(commit = true) {
-                        putBoolean("isNeedWelcoming", true)
-                    }
-                }*/
-            //Toast.makeText(context, searchPhrase, Toast.LENGTH_SHORT).show()
-        },
-        Modifier
-            .width(40.dp)
-            .height(40.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.Red,
-        ),
-        shape = RoundedCornerShape(10.dp)
-    ) {
-        Text(
-            text = "Test",
-            fontSize = MaterialTheme.typography.button.fontSize,
-            color = MaterialTheme.colors.secondary
-        )
-    }
-}
-
-
-/*@Preview(showBackground = true)
-@Composable
-fun previewHeroSection(){
-    heroSection()
-}*/
-
-
 
 
 @Composable
