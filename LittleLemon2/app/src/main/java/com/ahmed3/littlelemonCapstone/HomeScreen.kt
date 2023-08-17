@@ -306,7 +306,7 @@ fun MenuItems(menuItem: MenuItemRoom) {
             }
 
             val painter = rememberImagePainter(
-                "https://th.bing.com/th/id/OIP._IgGc9h6kbuSmYLsRhBNvwHaEo?pid=ImgDet&rs=1",
+                menuItem.image,
                 builder = {
                     transformations(
                         RoundedCornersTransformation(10f)
