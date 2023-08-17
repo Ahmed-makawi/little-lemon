@@ -18,3 +18,6 @@ object ProfileScreen:Destinations{
     override val route: String = "ProfileScreen"
 }
 
+object WelcomingScreen:Destinations{
+    override val route: String = "WelcomingScreen"
+}

@@ -78,7 +78,7 @@ fun bodyOfTheProfile(navController: NavController) {
                 .padding(20.dp, 40.dp, 0.dp, 40.dp)
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Box(
             modifier = Modifier
@@ -170,7 +170,7 @@ fun bodyOfTheProfile(navController: NavController) {
                     enabled = false
                 )
 
-                Spacer(modifier = Modifier.height(230.dp))
+                Spacer(modifier = Modifier.height(270.dp))
 
                 Button(
                     onClick = {

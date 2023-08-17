@@ -5,7 +5,6 @@ import android.content.Context.MODE_PRIVATE
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -26,10 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import androidx.navigation.NavController
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 @Composable
@@ -50,7 +46,7 @@ import kotlinx.coroutines.withContext
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(110.dp)
+                .height(65.dp)
                 .background(color = Color.White),
             contentAlignment = Alignment.Center
         ) {
@@ -59,7 +55,7 @@ import kotlinx.coroutines.withContext
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "header logo",
                 modifier = Modifier
-                    .height(45.dp)
+                    .height(35.dp)
                     .fillMaxWidth()
             )
         }
@@ -73,18 +69,19 @@ import kotlinx.coroutines.withContext
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(110.dp)
+                .height(90.dp)
                 .background(color = colorResource(id = R.color.darkGreen))
         ) {
             Text(
                 text = "Let's get to know you",
-                fontSize = 26.sp,
+                fontSize = 23.sp,
                 color = Color.White,
                 fontFamily = FontFamily.Serif,
             )
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @Composable
     fun bodyOfThePage(navController: NavController) {
 
@@ -217,7 +214,7 @@ import kotlinx.coroutines.withContext
 
                     )
 
-                    Spacer(modifier = Modifier.height(160.dp))
+                    Spacer(modifier = Modifier.height(230.dp))
 
                     val failedToast = Toast("Registration unsuccessful. Please enter all data")
                     val sucssesToast = Toast("Registration successful!")
@@ -240,11 +237,13 @@ import kotlinx.coroutines.withContext
                                             putString("lastName" , lastName)
                                             putString("email" , email)
                                             putBoolean("loginStatus" , loginStatus)
+                                            putBoolean("isNeedWelcoming" , false)
                                         }
 
                                     }
                                 }
                                 sucssesToast.show()
+                                navController.popBackStack()
                                 navController.popBackStack()
                                 navController.navigate(HomeScreen.route)
                             }
