@@ -355,7 +355,7 @@ fun menuBreakDown(
             item {
                 menuBreakDownCards(category, allMenu, filteredMenu)
             }
-    }
+        }
     }
 }
 
@@ -430,10 +430,6 @@ fun lowerSection(filteredMenu: MutableState<List<MenuItemRoom>>) {
             .background(MaterialTheme.colors.background)
             .padding(15.dp, 10.dp)
     ) {
-        if (filteredMenu.value.isEmpty()) {
-            searchNotFoundIcon()
-        }
-
         LazyColumn {
             items(filteredMenu.value!!) { menuItem ->
                 MenuItems(menuItem)
@@ -459,7 +455,7 @@ fun FilteringByTitle(
         } else {
             val lowercaseSearchPhrase = searchPhrase.value.lowercase()
             allMenuLiveDava2.filter { menuItem ->
-                menuItem.title.lowercase().contains(lowercaseSearchPhrase)
+                menuItem.title.lowercase().contains(lowercaseSearchPhrase , ignoreCase = true)
 
             }
         }
@@ -472,12 +468,12 @@ fun filteringByCetogry(
 ){
 
     filteredMenu.value =
-    if (category != "") {
-        allMenuLiveDava2.filter { menuItem ->
+        if (category != "") {
+            allMenuLiveDava2.filter { menuItem ->
                 menuItem.category.contains(category)
             }
-    }else
-    {
-        allMenuLiveDava2
-    }
+        }else
+        {
+            allMenuLiveDava2
+        }
 }
