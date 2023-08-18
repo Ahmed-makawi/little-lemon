@@ -83,28 +83,16 @@ fun header(navController: NavController) {
 }
 
 
-
-
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun bodyOfTheProfile(navController: NavController) {
 
 
-
     val context: Context = LocalContext.current
-    val sharedPreferences by lazy {context.getSharedPreferences("LittleLemon", MODE_PRIVATE)}
-    var showFirstName = ""
-    var showLastName = ""
-    var showEmail = ""
-
-    GlobalScope.launch{
-        withContext(Dispatchers.IO){
-            showFirstName = sharedPreferences.getString("firstName" , "").toString()
-            showLastName = sharedPreferences.getString("lastName" , "").toString()
-            showEmail = sharedPreferences.getString("email" , "").toString()
-        }
-    }
-
+    val sharedPreferences by lazy { context.getSharedPreferences("LittleLemon", MODE_PRIVATE) }
+    val showFirstName = sharedPreferences.getString("firstName", "").toString()
+    val showLastName = sharedPreferences.getString("lastName", "").toString()
+    val showEmail = sharedPreferences.getString("email", "").toString()
 
 
     Column(
@@ -129,136 +117,128 @@ fun bodyOfTheProfile(navController: NavController) {
             color = MaterialTheme.colors.secondary,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
-                .padding(20.dp, 40.dp, 0.dp, 20.dp)
+                .padding(top = 40.dp,bottom =  20.dp)
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
-       /* Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(MaterialTheme.colors.background)
-        ) {*/
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                /** FIRST NAME TEXT FIELD **/
-                OutlinedTextField(
-                    colors = TextFieldDefaults.textFieldColors(
-                        MaterialTheme.colors.secondary
-                    ),
-                    value = showFirstName,
-                    onValueChange = { "" },
-                    label = {
-                        Text(
-                            text = "First Name",
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colors.secondary
-                        )
-                    },
-                    modifier = Modifier
-                        .padding(horizontal = 20.dp)
-                        .width(350.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    maxLines = 1,
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Person, contentDescription = "")
-                    },
-                    enabled = false
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                /** LAST NAME TEXT FIELD **/
-                OutlinedTextField(
-                    colors = TextFieldDefaults.textFieldColors(
-                        MaterialTheme.colors.secondary
-                    ),
-                    value = showLastName,
-                    onValueChange = { showLastName},
-                    label = {
-                        Text(
-                            text = "Last Name",
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colors.secondary
-                        )
-                    },
-                    modifier = Modifier
-                        .padding(horizontal = 20.dp)
-                        .width(350.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    maxLines = 1,
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Person, contentDescription = "")
-                    },
-                    enabled = false
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                /** EMAIL TEXT FIELD **/
-                OutlinedTextField(
-                    colors = TextFieldDefaults.textFieldColors(
-                        MaterialTheme.colors.secondary
-                    ),
-                    value = showEmail,
-                    onValueChange = { showEmail },
-                    label = {
-                        Text(
-                            text = "Email",
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colors.secondary
-                        )
-                    },
-                    modifier = Modifier
-                        /*.padding(0.dp, 10.dp, 0.dp, 170.dp)*/
-                        .padding(horizontal = 20.dp)
-                        .width(350.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    maxLines = 1,
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Default.Email, contentDescription = "")
-                    },
-                    enabled = false
-                )
-
-                Spacer(modifier = Modifier.height(270.dp))
-
-                Button(
-                    onClick = {
-                        GlobalScope.launch {
-                            withContext(Dispatchers.IO) {
-                                sharedPreferences.edit(commit = true){
-                                    putString("firstName" , "")
-                                    putString("lastName" , "")
-                                    putString("email" , "")
-                                    putBoolean("loginStatus" , false)
-                                }
-                            }
-                        }
-                        navController.popBackStack()
-                        navController.popBackStack()
-                        navController.navigate(OnboardingScreen.route)
-                              }
-                           ,
-                    Modifier
-                        .width(350.dp)
-                        .height(46.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = MaterialTheme.colors.primary,
-                    ),
-                    shape = RoundedCornerShape(10.dp)
-                ) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            /** FIRST NAME TEXT FIELD **/
+            OutlinedTextField(
+                colors = TextFieldDefaults.textFieldColors(
+                    MaterialTheme.colors.secondary
+                ),
+                value = showFirstName,
+                onValueChange = { },
+                label = {
                     Text(
-                        text = "Log Out",
-                        fontSize = MaterialTheme.typography.button.fontSize,
+                        text = "First Name",
+                        fontSize = 12.sp,
                         color = MaterialTheme.colors.secondary
                     )
-                }
+                },
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .width(350.dp),
+                shape = RoundedCornerShape(10.dp),
+                maxLines = 1,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = "")
+                },
+                enabled = false
+            )
 
+            Spacer(modifier = Modifier.height(20.dp))
+
+            /** LAST NAME TEXT FIELD **/
+            OutlinedTextField(
+                colors = TextFieldDefaults.textFieldColors(
+                    MaterialTheme.colors.secondary
+                ),
+                value = showLastName,
+                onValueChange = { showLastName },
+                label = {
+                    Text(
+                        text = "Last Name",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colors.secondary
+                    )
+                },
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .width(350.dp),
+                shape = RoundedCornerShape(10.dp),
+                maxLines = 1,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Person, contentDescription = "")
+                },
+                enabled = false
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            /** EMAIL TEXT FIELD **/
+            OutlinedTextField(
+                colors = TextFieldDefaults.textFieldColors(
+                    MaterialTheme.colors.secondary
+                ),
+                value = showEmail,
+                onValueChange = { showEmail },
+                label = {
+                    Text(
+                        text = "Email",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colors.secondary
+                    )
+                },
+                modifier = Modifier
+                    /*.padding(0.dp, 10.dp, 0.dp, 170.dp)*/
+                    .padding(horizontal = 20.dp)
+                    .width(350.dp),
+                shape = RoundedCornerShape(10.dp),
+                maxLines = 1,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Default.Email, contentDescription = "")
+                },
+                enabled = false
+            )
+
+            Spacer(modifier = Modifier.height(120.dp))
+
+            Button(
+                onClick = {
+                    sharedPreferences.edit()
+                        .putString("firstName" , "")
+                        .putString("lastName" , "")
+                        .putString("email" , "")
+                        .putBoolean("loginStatus", false)
+                        .apply()
+
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.popBackStack()
+                    navController.navigate(OnboardingScreen.route)
+                },
+                Modifier
+                    .width(350.dp)
+                    .height(46.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.primary,
+                ),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "Log Out",
+                    fontSize = MaterialTheme.typography.button.fontSize,
+                    color = MaterialTheme.colors.secondary
+                )
             }
-        //}
+
+        }
     }
 }
