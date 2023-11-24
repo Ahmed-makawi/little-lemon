@@ -10,10 +10,13 @@ val primLight = Color(0xFFF4CE14)
 val thirdColorDark = Color(0xffEE9972)
 val thirdColorLight = Color(0xFFFBDABB)
 
-val Black3 = Color(0xff333333)
+/*val Black3 = Color(0xff333333)*/
+val Black3 = Color(0xFF282828)
 val White = Color(0xFFFFFFFF)
 //0xFFEDEFEE
 val TextDark = Color(0xFFEDEFEE)
 val TextLight = Color(0xFF000000)
 
 val lightGray = Color(0xFFEDEFEE)
+
+val myGray = Color(0xFF4A5F58)
