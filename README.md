@@ -3,7 +3,7 @@
 Food order app with jetpack compose using Api's
 
 
-<img src="https://github.com/Ahmed-makawi/timer/assets/119809534/3f42eaaf-959e-4281-a547-74f7bcf815f7" alt="photo_2023-11-20_00-38-11" width="600">
+<img src="https://github.com/Ahmed-makawi/timer/assets/119809534/3f42eaaf-959e-4281-a547-74f7bcf815f7" alt="photo_2023-11-20_00-38-11" width="700">
 
 
 ## This project uses: 
