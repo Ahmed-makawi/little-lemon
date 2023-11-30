@@ -9,6 +9,7 @@ Food order app with jetpack compose using Api's
 ## This project uses: 
 
 * Room database
+* Api
 * Ktor
 * Coil
 * MVVM
